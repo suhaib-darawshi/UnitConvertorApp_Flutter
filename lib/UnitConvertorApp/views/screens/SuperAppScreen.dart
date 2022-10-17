@@ -18,27 +18,27 @@ List<Tab> createTabs(List<Map<String, dynamic>> data) {
           ))
       .toList();
 }
+
 List<Widget> tabsBodyGenerator(
     List<Map<String, dynamic>> data,
     Function function,
     int index,
     Function ckeckList,
     Function checkInput,
-    num finalvalue) {
+    String finalvalue) {
   return data.map((e) {
     return Center(
       child: BasicScreen(e, function, index, ckeckList, checkInput, finalvalue),
     );
   }).toList();
 }
+
 class SuperAppScreen extends StatefulWidget {
   late List<Map<String, dynamic>> data;
   SuperAppScreen(this.data);
   @override
   State<SuperAppScreen> createState() => _SuperAppScreenState();
 }
-
-
 
 class _SuperAppScreenState extends State<SuperAppScreen>
     with SingleTickerProviderStateMixin {
@@ -69,12 +69,13 @@ class _SuperAppScreenState extends State<SuperAppScreen>
 
   num value = 1;
 
-  num ratio = 2;
+  num ratio = 1;
   num finalValue = 1;
+  late String formatted=1.toStringAsFixed(6);
   checkList(int n) {
-    
     ratio = 1.0 / widget.data[tabController.index]['fields'][index][n]['value'];
     finalValue = ratio * value;
+    formatted = finalValue.toStringAsFixed(5);
 
     setState(() {});
   }
@@ -82,6 +83,7 @@ class _SuperAppScreenState extends State<SuperAppScreen>
   checkinput(num n) {
     value = n;
     finalValue = ratio * n;
+    formatted = finalValue.toStringAsFixed(5);
     setState(() {});
   }
 
@@ -101,7 +103,7 @@ class _SuperAppScreenState extends State<SuperAppScreen>
       ),
       body: TabBarView(
         children: tabsBodyGenerator(widget.data, CheckCategory, index,
-            checkList, checkinput, finalValue),
+            checkList, checkinput, formatted),
         controller: tabController,
       ),
     );

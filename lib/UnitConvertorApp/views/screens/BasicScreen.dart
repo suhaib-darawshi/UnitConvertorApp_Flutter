@@ -19,7 +19,7 @@ class BasicScreen extends StatelessWidget {
   Function checkList;
   Function checkInput;
   late Map<String, dynamic> Category;
-  late num finalValue;
+  late String finalValue;
   late List icons;
   BasicScreen(this.Category, this.function, this.index, this.checkList,
       this.checkInput,this.finalValue) {

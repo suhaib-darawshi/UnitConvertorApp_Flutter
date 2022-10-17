@@ -12,7 +12,7 @@ import 'UnitWidget.dart';
 class ScreenList extends StatelessWidget {
   late List<Map<String, dynamic>> units;
   
-  late num meters;
+  late String meters;
   ScreenList(this.units, this.meters);
   @override
   Widget build(BuildContext context) {

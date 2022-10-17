@@ -15,7 +15,7 @@ class FullScreen extends StatelessWidget {
   late int index;
   Function checkList;
   Function checkinput;
-  num finalValue = 1;
+  String finalValue = 1.toStringAsFixed(6);
   late List<Map<String, dynamic>> list;
   FullScreen(this.list, this.index,this.checkList,this.checkinput,this.finalValue);
 
