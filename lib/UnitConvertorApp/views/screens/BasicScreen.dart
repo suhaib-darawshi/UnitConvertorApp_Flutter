@@ -14,6 +14,7 @@ import 'package:unit_convertor_app/UnitConvertorApp/views/screens/FullScreen.dar
 // }
 
 class BasicScreen extends StatelessWidget {
+  late int chosen = 0;
   late int index;
   late Function function;
   Function checkList;
@@ -22,7 +23,7 @@ class BasicScreen extends StatelessWidget {
   late String finalValue;
   late List icons;
   BasicScreen(this.Category, this.function, this.index, this.checkList,
-      this.checkInput,this.finalValue) {
+      this.checkInput, this.finalValue,this.chosen) {
     icons = this.Category['icons'];
   }
 
@@ -41,8 +42,8 @@ class BasicScreen extends StatelessWidget {
           ),
         ),
         Expanded(
-            child: FullScreen(
-                Category['fields'][index], index, checkList, checkInput,finalValue))
+            child: FullScreen(Category['fields'][index], index, checkList,
+                checkInput, finalValue,this.chosen))
       ],
     );
   }

@@ -7,6 +7,7 @@ import 'package:unit_convertor_app/UnitConvertorApp/data/dymmy_data.dart';
 
 void main(List<String> args) {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: SuperAppScreen(JSON),
   ));
 }
@@ -25,16 +26,19 @@ List<Widget> tabsBodyGenerator(
     int index,
     Function ckeckList,
     Function checkInput,
-    String finalvalue) {
+    String finalvalue,
+    int ch) {
   return data.map((e) {
     return Center(
-      child: BasicScreen(e, function, index, ckeckList, checkInput, finalvalue),
+      child: BasicScreen(
+          e, function, index, ckeckList, checkInput, finalvalue, ch),
     );
   }).toList();
 }
 
 class SuperAppScreen extends StatefulWidget {
   late List<Map<String, dynamic>> data;
+  int chosen = 0;
   SuperAppScreen(this.data);
   @override
   State<SuperAppScreen> createState() => _SuperAppScreenState();
@@ -47,6 +51,7 @@ class _SuperAppScreenState extends State<SuperAppScreen>
   initializeTabController() {
     tabController = TabController(length: widget.data.length, vsync: this);
   }
+  
 
   @override
   void initState() {
@@ -61,7 +66,7 @@ class _SuperAppScreenState extends State<SuperAppScreen>
   }
 
   int index = 0;
-
+  
   CheckCategory(int value) {
     index = value;
     setState(() {});
@@ -71,29 +76,37 @@ class _SuperAppScreenState extends State<SuperAppScreen>
 
   num ratio = 1;
   num finalValue = 1;
-  late String formatted=1.toStringAsFixed(6);
+  late String formatted = 1.toStringAsFixed(6);
   checkList(int n) {
     ratio = 1.0 / widget.data[tabController.index]['fields'][index][n]['value'];
     finalValue = ratio * value;
-    formatted = finalValue.toStringAsFixed(5);
-
+    formatted = finalValue.toString();
+    widget.chosen = n;
     setState(() {});
   }
 
   checkinput(num n) {
     value = n;
     finalValue = ratio * n;
-    formatted = finalValue.toStringAsFixed(5);
+    formatted = finalValue.toString();
     setState(() {});
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Unit Converter',
-          style: TextStyle(color: Colors.white70),
+        title: Column(
+          children: [
+            Text(
+              'Unit Converter',
+              style: TextStyle(color: Colors.white70),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: Divider(color: Colors.white70),
+            )
+          ],
         ),
         bottom: TabBar(
           tabs: createTabs(widget.data),
@@ -103,7 +116,7 @@ class _SuperAppScreenState extends State<SuperAppScreen>
       ),
       body: TabBarView(
         children: tabsBodyGenerator(widget.data, CheckCategory, index,
-            checkList, checkinput, formatted),
+            checkList, checkinput, formatted, widget.chosen),
         controller: tabController,
       ),
     );

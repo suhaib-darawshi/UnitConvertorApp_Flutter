@@ -24,37 +24,48 @@ class InputArea extends StatelessWidget {
   Function function;
   Function function2;
   String? input;
-  InputArea(this.list, this.function,this.function2);
+  int index = 0;
+  InputArea(this.list, this.function, this.function2, this.index) {
+    if (index >= list.length) {
+      index = list.length - 1;
+    }
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      decoration: BoxDecoration(
-        color: Colors.black87
-      ),
+      decoration: BoxDecoration(color: Colors.black87),
       child: Row(
         children: [
           Expanded(
               child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white70
-                )),
-                child: TextField(
-            onChanged: (value) {
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.white70)),
+            child: TextField(
+              textAlign: TextAlign.center,
+              onChanged: (value) {
                 input = value;
                 // log(value);
                 function(double.parse(value));
-            },
-            keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.white70),
-            autofocus: true,
-          ),
-              )),
+              },
+              keyboardType: TextInputType.number,
+              style: TextStyle(color: Colors.white70),
+              autofocus: true,
+            ),
+          )),
           Expanded(
               child: Container(
-            decoration: BoxDecoration(border: Border.all(color: Colors.white70)),
-            child: PopupMenuButton(icon: Icon(Icons.add_circle_outlined,color: Colors.white70,),
-                onSelected: (value) => function2(value),
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.white70)),
+            child: PopupMenuButton(
+                icon: Text(
+                  list[index]['name'],
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+                onSelected: (value) {
+                  function2(value);
+                },
                 itemBuilder: (BuildContext context) => itemsList(list)),
           ))
         ],
