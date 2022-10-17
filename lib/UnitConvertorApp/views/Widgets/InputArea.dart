@@ -53,7 +53,7 @@ class InputArea extends StatelessWidget {
           Expanded(
               child: Container(
             decoration: BoxDecoration(border: Border.all(color: Colors.white70)),
-            child: PopupMenuButton(
+            child: PopupMenuButton(icon: Icon(Icons.add_circle_outlined,color: Colors.white70,),
                 onSelected: (value) => function2(value),
                 itemBuilder: (BuildContext context) => itemsList(list)),
           ))

@@ -4,34 +4,26 @@ import 'package:unit_convertor_app/UnitConvertorApp/data/dymmy_data.dart';
 import 'package:unit_convertor_app/UnitConvertorApp/views/Widgets/FieldContainer.dart';
 import 'package:unit_convertor_app/UnitConvertorApp/views/screens/FullScreen.dart';
 
-void main(List<String> args) {
-  runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(),
-      body: BasicScreen(JSON[0]),
-    ),
-  ));
-}
+// void main(List<String> args) {
+//   runApp(MaterialApp(
+//     home: Scaffold(
+//       appBar: AppBar(),
+//       body: BasicScreen(JSON[0]),
+//     ),
+//   ));
+// }
 
-class BasicScreen extends StatefulWidget {
+class BasicScreen extends StatelessWidget {
+  late int index;
+  late Function function;
+  Function checkList;
+  Function checkInput;
   late Map<String, dynamic> Category;
+  late num finalValue;
   late List icons;
-  BasicScreen(this.Category) {
+  BasicScreen(this.Category, this.function, this.index, this.checkList,
+      this.checkInput,this.finalValue) {
     icons = this.Category['icons'];
-  }
-
-  @override
-  State<BasicScreen> createState() => _BasicScreenState();
-}
-
-class _BasicScreenState extends State<BasicScreen> {
-  int index = 0;
-
-  CheckCategory(int value) {
-    index = value;
-    setState(() {
-      
-    });
   }
 
   @override
@@ -42,12 +34,15 @@ class _BasicScreenState extends State<BasicScreen> {
           decoration: BoxDecoration(color: Colors.black54),
           height: 50,
           child: Row(
-            children: widget.icons.map((e) {
-              return FieldContainer(Field.fromMap(e),widget.icons.indexOf(e),CheckCategory);
+            children: icons.map((e) {
+              return FieldContainer(
+                  Field.fromMap(e), icons.indexOf(e), function);
             }).toList(),
           ),
         ),
-        Expanded(child: FullScreen(widget.Category['fields'][index]))
+        Expanded(
+            child: FullScreen(
+                Category['fields'][index], index, checkList, checkInput,finalValue))
       ],
     );
   }
