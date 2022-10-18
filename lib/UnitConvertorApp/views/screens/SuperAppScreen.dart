@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unit_convertor_app/UnitConvertorApp/views/screens/BasicScreen.dart';
 import 'package:unit_convertor_app/UnitConvertorApp/data/dymmy_data.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main(List<String> args) {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -94,6 +94,7 @@ class _SuperAppScreenState extends State<SuperAppScreen>
   
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, designSize: Size( 393,891));
     return Scaffold(
       appBar: AppBar(
         title: Column(

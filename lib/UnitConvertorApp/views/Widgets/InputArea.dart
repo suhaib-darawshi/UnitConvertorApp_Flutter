@@ -4,7 +4,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unit_convertor_app/UnitConvertorApp/data/dymmy_data.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // void main(List<String> args) {
 //   runApp(MaterialApp(
 //     home: Scaffold(appBar: AppBar(), body: InputArea(lengthUnits)),
@@ -34,7 +34,7 @@ class InputArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 50.h,
       decoration: BoxDecoration(color: Colors.black87),
       child: Row(
         children: [

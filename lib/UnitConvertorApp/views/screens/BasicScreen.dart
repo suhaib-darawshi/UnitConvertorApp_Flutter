@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:unit_convertor_app/UnitConvertorApp/data/dymmy_data.dart';
 import 'package:unit_convertor_app/UnitConvertorApp/views/Widgets/FieldContainer.dart';
 import 'package:unit_convertor_app/UnitConvertorApp/views/screens/FullScreen.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 // void main(List<String> args) {
 //   runApp(MaterialApp(
 //     home: Scaffold(
@@ -29,11 +29,12 @@ class BasicScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Column(
       children: [
         Container(
           decoration: BoxDecoration(color: Colors.black54),
-          height: 50,
+          height: 50.h,
           child: Row(
             children: icons.map((e) {
               return FieldContainer(
